@@ -50,7 +50,6 @@ class ViewController: UIViewController {
             "He actually served as a mentor for Google founders Sergey Brin and Larry Page, even sharing some of his advisers with the Google duo.",
             "He was a pescetarian, meaning he ate no meat except for fish."
         ]
-    
         
         let billGatesFacts = [
         
@@ -65,13 +64,16 @@ class ViewController: UIViewController {
         billOrSteveFacts.updateValue(steveJobsFacts, forKey: "Steve Jobs")
         billOrSteveFacts.updateValue(billGatesFacts, forKey: "Bill Gates")
         
+        //literal notation
+        //billOrSteveFacts["Steve Jobs"] = steveJobsFacts
+        //billOrSteveFacts["Bill Gates"] = billGatesFacts
+        
     }
 
     
     func getRandomFact() -> (person: String, fact: String)? {
         
         var person = randomPerson()
-        
         var randomFact = ""
         
         if let person = billOrSteveFacts[person] {
@@ -109,6 +111,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func billGatesButtonTapped(sender: AnyObject) {
+        
         if let billFacts = billOrSteveFacts["Bill Gates"] {
             if let possibleBillFact = randomFactLabel.text {
                 if billFacts.contains(possibleBillFact){
