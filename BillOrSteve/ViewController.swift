@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     var billOrSteveFacts : [String:[String]] = [:]
+    var currentScore = 0
     
     @IBOutlet weak var randomFactLabel: UILabel!
     @IBOutlet weak var score: UILabel!
@@ -21,7 +22,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createFacts()
-        getRandomFact()
+        showfact()
         // add some code to the end of this method to initialize the app
     }
     
@@ -41,6 +42,7 @@ class ViewController: UIViewController {
     }
     
     func createFacts() {
+        
         let steveJobsFacts = [
             
             "He took a calligraphy course, which he says was instrumental in the future company products' attention to typography and font.",
@@ -64,18 +66,17 @@ class ViewController: UIViewController {
         billOrSteveFacts.updateValue(billGatesFacts, forKey: "Bill Gates")
         
     }
+
     
-    
-    func getRandomFact() -> (String, String) {
+    func getRandomFact() -> (person: String, fact: String)? {
         
         var person = randomPerson()
         
         var randomFact = ""
         
         if let person = billOrSteveFacts[person] {
-            let numberOfFacts = person.count
-            let randomFactToSelect = randomNumberFromZeroTo(numberOfFacts)
-            randomFact = person[randomFactToSelect]
+            let randomFactSelected = randomNumberFromZeroTo(person.count)
+            randomFact = person[randomFactSelected]
         } else {
             person = ""
         }
@@ -83,13 +84,48 @@ class ViewController: UIViewController {
         return(person, randomFact)
     }
     
+    
+    func showfact() {
+        let randomFact = getRandomFact()
+        randomFactLabel.text = randomFact?.fact
+    }
+    
+    
     @IBAction func steveJobsButtonTapped(sender: AnyObject) {
         
-        if getRandomFact() ==
+        if let steveFacts = billOrSteveFacts["Steve Jobs"] {
+            if let possibleSteveFact = randomFactLabel.text {
+                if steveFacts.contains(possibleSteveFact){
+                    currentScore += 1
+                    score.text = String(currentScore)
+                    }
+                else {
+                    showfact()
+                }
+            }
+        }
+        showfact()
     }
     
     
     @IBAction func billGatesButtonTapped(sender: AnyObject) {
+        if let billFacts = billOrSteveFacts["Bill Gates"] {
+            if let possibleBillFact = randomFactLabel.text {
+                if billFacts.contains(possibleBillFact){
+                    currentScore += 1
+                    score.text = String(currentScore)
+                } else {
+                    showfact()
+                }
+            }
+        }
+        showfact()
     }
     
-}
+    //THE END
+    
+    }
+
+    
+    
+
