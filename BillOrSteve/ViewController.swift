@@ -12,13 +12,20 @@ class ViewController: UIViewController {
     
     var billOrSteveFacts : [String:[String]] = [:]
     
+    @IBOutlet weak var randomFactLabel: UILabel!
+    @IBOutlet weak var score: UILabel!
+    @IBOutlet weak var steveJobsOutlet: UIButton!
+    @IBOutlet weak var billGatesOutlet: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         createFacts()
         getRandomFact()
         // add some code to the end of this method to initialize the app
     }
-
+    
+    
     func randomNumberFromZeroTo(number: Int) -> Int {
         return Int(arc4random_uniform(UInt32(number)))
     }
@@ -62,6 +69,7 @@ class ViewController: UIViewController {
     func getRandomFact() -> (String, String) {
         
         var person = randomPerson()
+        
         var randomFact = ""
         
         if let person = billOrSteveFacts[person] {
@@ -73,6 +81,15 @@ class ViewController: UIViewController {
         }
         
         return(person, randomFact)
+    }
+    
+    @IBAction func steveJobsButtonTapped(sender: AnyObject) {
+        
+        if getRandomFact() ==
+    }
+    
+    
+    @IBAction func billGatesButtonTapped(sender: AnyObject) {
     }
     
 }
